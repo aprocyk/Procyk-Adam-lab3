@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script type="text/javascript" src="script.js"></script> -->
+</head>
+
+<body>
+
+    <audio src="sounds/boom.wav" controls id="bBoom"></audio>
+    <audio src="sounds/hihat.wav" controls id="hihat"></audio>
+    <audio src="sounds/kick.wav" controls id="kick"></audio>
+    <audio src="sounds/openhat.wav" controls id="openhat"></audio>
+    <audio src="sounds/ride.wav" controls id="ride"></audio>
+    <audio src="sounds/snare.wav" controls id="snare"></audio>
+    <audio src="sounds/tink.wav" controls id="tink"></audio>
+    <audio src="sounds/tom.wav" controls id="tom"></audio>
+    <audio src="sounds/clap.wav" controls id="aClap"></audio>
+    <button id="playIt">Odtwórz</button>
+    <script>
+        const boom = document.querySelector('#bBoom');
+        const clap = document.querySelector('#aClap');
+        const hihat = document.querySelector('#hihat');
+        const kick = document.querySelector('#kick');
+        const openhat = document.querySelector('#openhat');
+        const ride = document.querySelector('#ride');
+        const snare = document.querySelector('#snare');
+        const tink = document.querySelector('#tink');
+        const tom = document.querySelector('#tom');
+        const channel1 = [];
+        let odtworz = document.querySelector('#playIt');
+
+        document.body.addEventListener('keypress', playClap);
+        document.body.addEventListener('keypress', playBoom);
+        document.body.addEventListener('keypress', playHihat);
+        document.body.addEventListener('keypress', playKick);
+        document.body.addEventListener('keypress', playOpenhat);
+        document.body.addEventListener('keypress', playRide);
+        document.body.addEventListener('keypress', playSnare);
+        document.body.addEventListener('keypress', playTom);
+        document.body.addEventListener('keypress', playTink);
+        odtworz.addEventListener('click', playReplay);
+
+
+        function playClap(e) {
+            if (e.code == "KeyA") {
+                clap.currentTime = 0;
+                clap.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playBoom(e) {
+            if (e.code == "KeyS") {
+                boom.currentTime = 0;
+                boom.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playHihat(e) {
+            if (e.code == "KeyD") {
+                hihat.currentTime = 0;
+                hihat.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playKick(e) {
+            if (e.code == "KeyF") {
+                kick.currentTime = 0;
+                kick.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playSnare(e) {
+            if (e.code == "KeyH") {
+                snare.currentTime = 0;
+                snare.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playTink(e) {
+            if (e.code == "KeyJ") {
+                tink.currentTime = 0;
+                tink.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playTom(e) {
+            if (e.code == "KeyK") {
+                tom.currentTime = 0;
+                tom.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playOpenhat(e) {
+            if (e.code == "KeyL") {
+                openhat.currentTime = 0;
+                openhat.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playRide(e) {
+            if (e.code == "KeyG") {
+                ride.currentTime = 0;
+                ride.play();
+                const time = Date.now();
+                channel1.push({
+                    key: e.code,
+                    time: time
+                });
+            }
+            console.log(channel1);
+        }
+        function playReplay(e) {
+            // console.log(channel1[1]);
+            // const key = channel1.key;
+            // const time = channel1.time;
+            for (let i of channel1) {
+                
+                    if (i.key === "KeyA") {
+                        
+                        clap.currentTime = 0;
+                        clap.play();
+                        
+                    } else if (i.key === "KeyS") {
+                        boom.currentTime = 0;
+                        boom.play();
+                    } else if (i.key === "KeyD") {
+                        hihat.play();
+                    } else if (i.key === "KeyF") {
+                        kick.play();
+                    } else if (i.key === "KeyG") {
+                        snare.play();
+                    } else if (i.key === "KeyH") {
+                        tink.play();
+                    } else if (i.key === "KeyJ") {
+                        tom.play();
+                    } else if (i.key === "KeyK") {
+                        openhat.play();
+                    } else if (i.key === "KeyL") {
+                        ride.play();
+                    
+                
+        }
+    }
+}
+    </script>
+</body>
+
+</html>
