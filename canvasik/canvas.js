@@ -3,29 +3,48 @@ document.addEventListener('DOMContentLoaded', appStart)
 var imageLoader
 let canvas
 let ctx
+let brushsize
+let brushout
+let brushcolor
+
 
 
 function appStart(){
     //get canvas
+    const ps = new Photoshop('canvas');
+
     imageLoader = document.getElementById('imageLoader')
         imageLoader.addEventListener('change', handleImage, false)
+    
     canvas = document.querySelector('#canvas')
+
+    document.querySelector('#circleBrush')
+        .addEventListener('click', () => ps.setBrushShape('circle')) 
+
+    document.querySelector('#squareBrush')
+        .addEventListener('click', () => ps.setBrushShape('square'))
+    brushout = document.querySelector('#brushsizeout')
+    brushsize = document.querySelector('#sizeBrush')
+    brushsize.addEventListener('mouseup',function(){
+        brushout.innerHTML = brushsize.value
+        ps.setBrushSize(brushsize.value)
+    })
+    brushcolor = document.querySelector('#brushcolor')
+    brushcolor.addEventListener('change',() => ps.setBrushColor(brushcolor.value))
+    brushsize.value = 10
+    brushout.innerHTML = brushsize.value
+    brushcolor.value = 'black';
+    
+     
+        
     
     
     document
         .querySelector('#darken')
         .addEventListener('click',() => darkenImage())
-    
+
     ctx = canvas.getContext('2d')
-    //drawCanvasImage()
 }
-// function drawCanvasImage(){
-//     const image = new Image()
-//     image.src = 'zabka.jpg'
-//     image.addEventListener('load', ()=>{
-//         ctx.drawImage(image, 0, 0)
-//     })
-//}
 function handleImage(e){
     var reader = new FileReader()
     reader.onload = function(event){

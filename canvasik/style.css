@@ -1,3 +1,9 @@
+#canvas {
+   position: absolute;
+   background: lightgrey;
+   width: 100%;
+   bottom: 0;
+}
 .brush {
     position: absolute;
     width: 10px;
@@ -14,6 +20,15 @@
 }
 .red {
    background: red;
+}
+.blue{
+   background: blue;
+}
+.green{
+   background: green;
+}
+.black{
+   background: black;
 }
 .square-brush-btn {
    width: 25px;
