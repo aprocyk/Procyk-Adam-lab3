@@ -1,0 +1,8 @@
+.notka{
+    position: relative;
+    margin: 10px;
+    min-width: 200px;
+    max-width: 400px ;
+    min-height: 200px;
+    float: left;
+}
