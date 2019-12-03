@@ -17,18 +17,29 @@
 
     </canvas>
     <div id="toolbar">
-        <button id="circleBrush" class="circle-brush-btn"></button>
-        <button id="squareBrush" class="square-brush-btn"></button> 
-        <button id="darken">Sciemnij</button>
-        <input type="file" id="imageLoader"/>
-        <input type="range" id="sizeBrush" min="5" max="50" value="5">
-        <a id="brushsizeout"></a>
-        <select id="brushcolor">
-            <option value="red">Red</option>
-            <option value="blue">Blue</option>
-            <option value="green">Green</option>
-            <option value="black">Black</option>
-        </select>
+        <div class="toolBarLeftSide">
+            <button id="circleBrush" class="circle-brush-btn"></button>
+            <button id="squareBrush" class="square-brush-btn"></button> 
+        </div>
+       
+        <div class="toolBarLeftSide">
+            
+            <input type="range" id="sizeBrush" min="5" max="50" value="5">
+            <a id="brushsizeout"></a>
+        </div>
+        <div class="toolBarRightSide imageOptions">
+                <button id="darken">Sciemnij</button>
+                <input type="file" id="imageLoader"/>
+        </div>
+        <div class="toolBarLeftDown">
+            <select id="brushcolor">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="black">Black</option>
+            </select>
+        </div>
+        
     </div>
     
 </body>

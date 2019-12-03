@@ -6,8 +6,13 @@ let ctx
 let brushsize
 let brushout
 let brushcolor
-
-
+let brushCircleClass
+let brushSquareClass
+let isMouseDown
+let currentBrushSize
+let currentBrushColor
+let currentBrushShape
+let linesArray
 
 function appStart(){
     //get canvas
@@ -17,33 +22,62 @@ function appStart(){
         imageLoader.addEventListener('change', handleImage, false)
     
     canvas = document.querySelector('#canvas')
-
-    document.querySelector('#circleBrush')
-        .addEventListener('click', () => ps.setBrushShape('circle')) 
-
-    document.querySelector('#squareBrush')
-        .addEventListener('click', () => ps.setBrushShape('square'))
+    brushCircleClass = document.querySelector('.circle-brush-btn')
+    brushSquareClass = document.querySelector('.square-brush-btn')
     brushout = document.querySelector('#brushsizeout')
     brushsize = document.querySelector('#sizeBrush')
-    brushsize.addEventListener('mouseup',function(){
-        brushout.innerHTML = brushsize.value
-        ps.setBrushSize(brushsize.value)
-    })
     brushcolor = document.querySelector('#brushcolor')
-    brushcolor.addEventListener('change',() => ps.setBrushColor(brushcolor.value))
-    brushsize.value = 10
-    brushout.innerHTML = brushsize.value
-    brushcolor.value = 'black';
-    
-     
-        
-    
-    
+    isMouseDown = false;
+    currentBrushShape = 'round'
+    document.querySelector('#circleBrush')
+        .addEventListener('click', () => {
+            ps.setBrushShape('round')
+            currentBrushShape = 'round'
+        }) 
+
+    document.querySelector('#squareBrush')
+        .addEventListener('click', () => {
+            ps.setBrushShape('square')
+            currentBrushShape = 'square'
+        })
     document
         .querySelector('#darken')
         .addEventListener('click',() => darkenImage())
-
+    brushsize.addEventListener('mouseup',function(){
+        brushout.innerHTML = brushsize.value
+        ps.setBrushSize(brushsize.value)
+        if(brushsize.value <= 20){
+            brushCircleClass.style.width = '20px'
+            brushCircleClass.style.height = '20px'
+            brushSquareClass.style.width = '20px'
+            brushSquareClass.style.height = '20px'
+        }else{
+            brushCircleClass.style.width = brushsize.value+"px"
+            brushCircleClass.style.height = brushsize.value+"px"
+            brushSquareClass.style.width = brushsize.value+"px"
+            brushSquareClass.style.height = brushsize.value+"px"
+        }
+    
+    })
+    
+    brushcolor.addEventListener('change',function(){
+        ps.setBrushColor(brushcolor.value)
+        brushCircleClass.style.background = brushcolor.value
+        brushSquareClass.style.background = brushcolor.value
+    })
+    canvas.addEventListener('mousedown', function(){mousedown(canvas,event)})
+    canvas.addEventListener('mousemove',function(){mousemove(canvas,event)})
+    canvas.addEventListener('mouseup',mouseup)
+    brushsize.value = 10
+    brushout.innerHTML = brushsize.value
+    brushcolor.value = 'black';
+    brushCircleClass.style.background = brushcolor.value
+    brushSquareClass.style.background = brushcolor.value
     ctx = canvas.getContext('2d')
+    
+    
+    
+    //linesArray = []
 }
 function handleImage(e){
     var reader = new FileReader()
@@ -61,11 +95,55 @@ function handleImage(e){
 }
 function darkenImage(amount = 30){
     const canvasData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    console.log(canvasData)
+
 
     for(let i = 0; i<canvasData.data.length; i++){
         canvasData.data[i] -= amount
     }
     
     ctx.putImageData(canvasData,0,0)
+}
+function getMousePos(canvas,e){
+    
+    var rect = canvas.getBoundingClientRect()
+    scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
+      scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+    return{
+        x: (e.clientX- rect.left)*scaleX,
+        y: (e.clientY - rect.top)*scaleY
+
+    }
+}
+function mousedown(canvas,e){
+    let mousePos = getMousePos(canvas,e)
+    isMouseDown = true
+    let currentPos = getMousePos(canvas, e)
+    ctx.moveTo(currentPos.x,currentPos.y)
+    ctx.beginPath()
+    ctx.lineWidth = brushsize.value
+    ctx.lineCap = currentBrushShape
+    ctx.strokeStyle = brushcolor.value
+}
+function mousemove(canvas,e){
+    if(isMouseDown){
+        let currentPos = getMousePos(canvas, e)
+        ctx.lineTo(currentPos.x,currentPos.y)
+        ctx.stroke();
+        // store(currentPos.x,currentPos.y,currentBrushSize, 
+        //     currentBrushColor, currentBrushShape)
+    }
+}
+// function store(x,y,si,c,sh){
+//     var line = {
+//         'x': x,
+//         'y': y,
+//         'size': si,
+//         'color': c,
+//         'shape': sh
+//     }
+//     linesArray.push(line)
+// }
+function mouseup(){
+    isMouseDown=false
+    // store()
 }

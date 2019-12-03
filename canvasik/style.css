@@ -4,15 +4,41 @@
    width: 100%;
    bottom: 0;
 }
+#toolbar{
+   height: 100px;
+   top: 0;
+   left: 0;
+   position: fixed;
+   width: 100%;
+   background: gray;
+}
+
+.toolBarLeftDown{
+   clear: left;
+}
+.toolBarLeftSide{
+   margin: 5px;
+   padding: 5px;
+   
+   float: left;
+   width: auto;
+   border: 1px solid black;
+}
+.toolBarRightSide{
+   margin: 5px;
+   padding: 2px;
+   position: absolute;
+   float: right;
+   right: 2px;
+   width: auto;
+   border: 1px solid black;
+}
+
 .brush {
     position: absolute;
     width: 10px;
     height: 10px;
-    animation-name: dissapear;
-    animation-duration: 1s;
-    animation-delay: 2s;
-    animation-timing-function: ease-out;
-    /* animation-fill-mode: forwards; */
+    
     background: pink;
 }
 .circle {
@@ -31,14 +57,14 @@
    background: black;
 }
 .square-brush-btn {
-   width: 25px;
-   height: 25px;
+   width: 20px;
+   height: 20px;
    background: pink;
    border: none;
 }
 .circle-brush-btn {
-   width: 25px;
-   height: 25px;
+   width: 20px;
+   height: 20px;
    background: pink;
    border: none;
    border-radius: 50%;
