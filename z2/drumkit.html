@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <!-- <script type="text/javascript" src="script.js"></script> -->
+    <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
@@ -20,174 +20,153 @@
     <audio src="sounds/tink.wav" controls id="tink"></audio>
     <audio src="sounds/tom.wav" controls id="tom"></audio>
     <audio src="sounds/clap.wav" controls id="aClap"></audio>
-    <button id="playIt">Odtwórz</button>
-    <script>
-        const boom = document.querySelector('#bBoom');
-        const clap = document.querySelector('#aClap');
-        const hihat = document.querySelector('#hihat');
-        const kick = document.querySelector('#kick');
-        const openhat = document.querySelector('#openhat');
-        const ride = document.querySelector('#ride');
-        const snare = document.querySelector('#snare');
-        const tink = document.querySelector('#tink');
-        const tom = document.querySelector('#tom');
+    <button id="recordItCh1">Nagraj</button>
+    <button id="stopItCh1">Zatrzymaj nagrywanie</button>
+    <button id="playItCh1">Odtwórz</button>
+    <button id="clearItCh1">Wyczyść</button>
+    <!-- <script>
         const channel1 = [];
-        let odtworz = document.querySelector('#playIt');
+        let startTime
+        let startRecordingCh1 = document.querySelector('#recordItCh1');
+        let stopRecordingCh1 = document.querySelector('#stopItCh1');
+        let playRecordingCh1 = document.querySelector('#playItCh1');
+        document.body.addEventListener('keypress',playSound);
+        startRecordingCh1.addEventListener('click', recordCh1);
+        
 
-        document.body.addEventListener('keypress', playClap);
-        document.body.addEventListener('keypress', playBoom);
-        document.body.addEventListener('keypress', playHihat);
-        document.body.addEventListener('keypress', playKick);
-        document.body.addEventListener('keypress', playOpenhat);
-        document.body.addEventListener('keypress', playRide);
-        document.body.addEventListener('keypress', playSnare);
-        document.body.addEventListener('keypress', playTom);
-        document.body.addEventListener('keypress', playTink);
-        odtworz.addEventListener('click', playReplay);
+        const SoundKeys = {
+            clap: {
+                key: 'KeyA',
+                item: document.querySelector('#aClap')
+            },
+            boom: {
+                key: 'KeyS',
+                item: document.querySelector('#bBoom')
+            },
+            hihat: {
+                key: 'KeyD',
+                item: document.querySelector('#hihat')
+            },
+            kick: {
+                key: 'KeyF',
+                item: document.querySelector('#kick')
+            },
+            openhat: {
+                key: 'KeyG',
+                item: document.querySelector('#openhat')
+            },
+            ride: {
+                key: 'KeyH',
+                item: document.querySelector('#ride')
+            },
+            snare: {
+                key: 'KeyJ',
+                item: document.querySelector('#snare')
+            },
+            tom: {
+                key: 'KeyK',
+                item: document.querySelector('#tom')
+            },
+            tink: {
+                key: 'KeyL',
+                item: document.querySelector('#tink')
+            }
+        }
+        
+        function playSound(e){
+            switch(e.code){
+                case 'KeyA':
+                    SoundKeys.clap.item.currentTime = 0;
+                    SoundKeys.clap.item.play();
+                    break
+                case 'KeyS':
+                    SoundKeys.boom.item.currentTime = 0;
+                    SoundKeys.boom.item.play();
+                    break
+                case 'KeyD':
+                    SoundKeys.hihat.item.currentTime = 0;
+                    SoundKeys.hihat.item.play();
+                    break
+                case 'KeyF':
+                    SoundKeys.kick.item.currentTime = 0;
+                    SoundKeys.kick.item.play();
+                    break
+                case 'KeyG':
+                    SoundKeys.openhat.item.currentTime = 0;
+                    SoundKeys.openhat.item.play();
+                    break
+                case 'KeyH':
+                    SoundKeys.ride.item.currentTime = 0;
+                    SoundKeys.ride.item.play();
+                    break
+                case 'KeyJ':
+                    SoundKeys.snare.item.currentTime = 0;
+                    SoundKeys.snare.item.play();
+                    break
+                case 'KeyK':
+                    SoundKeys.tom.item.currentTime = 0;
+                    SoundKeys.tom.item.play();
+                    break
+                case 'KeyL':
+                    SoundKeys.tink.item.currentTime = 0;
+                    SoundKeys.tink.item.play();
+                    break
+            }
+        }
 
-
-        function playClap(e) {
-            if (e.code == "KeyA") {
-                clap.currentTime = 0;
-                clap.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
+        function recordSoundCh1(e){
+            switch(e.code){
+                case 'KeyA':
+                    pushCh1(e);
+                    break
+                case 'KeyS':
+                    pushCh1(e);
+                    break
+                case 'KeyD':
+                    pushCh1(e);
+                    break
+                case 'KeyF':
+                    pushCh1(e);
+                    break
+                case 'KeyG':
+                    pushCh1(e);
+                    break
+                case 'KeyH':
+                    pushCh1(e);
+                    break
+                case 'KeyJ':
+                    pushCh1(e);
+                    break
+                case 'KeyK':
+                    pushCh1(e);
+                    break
+                case 'KeyL':
+                    pushCh1(e);
+                    break
             }
-            console.log(channel1);
         }
-        function playBoom(e) {
-            if (e.code == "KeyS") {
-                boom.currentTime = 0;
-                boom.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playHihat(e) {
-            if (e.code == "KeyD") {
-                hihat.currentTime = 0;
-                hihat.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playKick(e) {
-            if (e.code == "KeyF") {
-                kick.currentTime = 0;
-                kick.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playSnare(e) {
-            if (e.code == "KeyH") {
-                snare.currentTime = 0;
-                snare.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playTink(e) {
-            if (e.code == "KeyJ") {
-                tink.currentTime = 0;
-                tink.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playTom(e) {
-            if (e.code == "KeyK") {
-                tom.currentTime = 0;
-                tom.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playOpenhat(e) {
-            if (e.code == "KeyL") {
-                openhat.currentTime = 0;
-                openhat.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playRide(e) {
-            if (e.code == "KeyG") {
-                ride.currentTime = 0;
-                ride.play();
-                const time = Date.now();
-                channel1.push({
-                    key: e.code,
-                    time: time
-                });
-            }
-            console.log(channel1);
-        }
-        function playReplay(e) {
-            // console.log(channel1[1]);
-            // const key = channel1.key;
-            // const time = channel1.time;
-            for (let i of channel1) {
-                
-                    if (i.key === "KeyA") {
-                        
-                        clap.currentTime = 0;
-                        clap.play();
-                        
-                    } else if (i.key === "KeyS") {
-                        boom.currentTime = 0;
-                        boom.play();
-                    } else if (i.key === "KeyD") {
-                        hihat.play();
-                    } else if (i.key === "KeyF") {
-                        kick.play();
-                    } else if (i.key === "KeyG") {
-                        snare.play();
-                    } else if (i.key === "KeyH") {
-                        tink.play();
-                    } else if (i.key === "KeyJ") {
-                        tom.play();
-                    } else if (i.key === "KeyK") {
-                        openhat.play();
-                    } else if (i.key === "KeyL") {
-                        ride.play();
-                    
-                
+    function playCh1(){
+        for(let i = 0; i < channel1.length; i++){
+            setTimeout(playSound, channel1[i].time, channel1[i].key);
         }
     }
-}
-    </script>
+    function stopRecCh1(){
+        document.body.removeEventListener('keypress', recordSoundCh1);
+        playRecordingCh1.body.addEventListener('click',playCh1);
+    }
+    function recordCh1(){
+        startTime = Date.now();
+        document.body.addEventListener('keypress',recordSoundCh1);
+        stopRecordingCh1.body.addEventListener('click',stopRecCh1);
+    }
+    function pushCh1(e){
+        const time = Date.now() - startTime;
+        channel1.push({
+            key: e.code,
+            time: time
+        })
+    }
+    </script> -->
 </body>
 
 </html>
