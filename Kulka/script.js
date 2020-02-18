@@ -5,11 +5,11 @@ let milisecond, t, collision;
 let holeArray = [];
 
 function appStart() {
-    //let board = new Board();
     field = document.querySelector('.field')
     ball = document.querySelector('.ball')
     restart = document.querySelector('.restart')
     stoper = document.querySelector('.stoper')
+    
     restart.addEventListener('click',refreshPage)
     animateball = () => move;
     window.addEventListener('deviceorientation', move)
@@ -24,7 +24,7 @@ function appStart() {
     stopwatch();
 }
 
-function handleGravity() {
+function handleMovement() {
     let xVelocity = event.gamma * 0.1;
     let yVelocity = event.beta * 0.1;
     let ballYPos = parseInt(ball.style.top) + yVelocity + 'px';
@@ -39,7 +39,7 @@ function handleGravity() {
      
 }
 function move() {
-    handleGravity();
+    handleMovement();
     window.requestAnimationFrame(animateball);
 }
 function generateHole() {
@@ -54,9 +54,7 @@ function generateHole() {
         field.appendChild(hole);
     }
 }
-function tru(){
-    return true;
-}
+
 function checkCollsion() {
     holeArray.forEach((item) => {
         if (parseInt(ball.style.top) > item.toph
